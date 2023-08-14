@@ -51,7 +51,7 @@
             android:textSize="36sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/daily_weather_description"
-            app:layout_constraintEnd_toStartOf="@id/daily_maxwind"
+            app:layout_constraintEnd_toStartOf="@id/daily_wind"
             app:layout_constraintStart_toEndOf="@id/daily_weather_icon"
             app:layout_constraintTop_toBottomOf="@id/date"
             tools:text="20°C" />
@@ -72,21 +72,21 @@
             tools:text="Patchy rain possible" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/daily_maxwind"
+            android:id="@+id/daily_wind"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/grey"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@id/daily_avghumidity"
+            app:layout_constraintBottom_toTopOf="@id/daily_humidity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/daily_temperature"
             app:layout_constraintTop_toBottomOf="@id/date"
             tools:text="Wind speed: 20,2 kph" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/daily_avghumidity"
+            android:id="@+id/daily_humidity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -96,7 +96,7 @@
             app:layout_constraintBottom_toTopOf="@id/daily_weather_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/daily_temperature"
-            app:layout_constraintTop_toBottomOf="@id/daily_maxwind"
+            app:layout_constraintTop_toBottomOf="@id/daily_wind"
             tools:text="Humidity: 61%" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
