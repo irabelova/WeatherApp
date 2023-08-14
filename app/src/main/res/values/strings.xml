@@ -3,4 +3,5 @@
     <string name="moscow">Moscow</string>
     <string name="search_image">Search image</string>
     <string name="status_image">Status image</string>
+    <string name="daily_weather_icon">daily weather icon</string>
 </resources>

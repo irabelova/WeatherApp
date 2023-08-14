@@ -10,5 +10,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, WeatherFragment())
             .commit()
+
+//        val key = BuildConfig.API_KEY
+//        Log.d("key", key)
     }
 }
