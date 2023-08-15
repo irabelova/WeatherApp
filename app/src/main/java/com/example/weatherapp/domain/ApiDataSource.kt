@@ -7,9 +7,9 @@ class ApiDataSource  @Inject constructor(
     private val service: WeatherApiService,
     private val mapper: Mapper
 ) : DataSource {
-    override suspend fun getWeatherForecast(city: String): List<WeatherModel> {
-        return service.getWeatherForecastByCity(city = city)
-            .map { mapper.weatherDtoToWeather(it) }
-    }
 
+    override suspend fun getWeatherForecast(city: String): List<DailyWeatherModel> {
+        val weatherDto = service.getWeatherForecastByCity(city = city)
+            return mapper.weatherDtoToDailyWeatherModel(weatherDto)
+    }
 }

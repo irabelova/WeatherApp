@@ -1,17 +1,23 @@
 package com.example.weatherapp.domain
 
-import com.example.weatherapp.data.network.WeatherDtoModel
+import com.example.weatherapp.data.network.models.WeatherDto
 import javax.inject.Inject
 
-class Mapper @Inject constructor(){
-    fun weatherDtoToWeather(weatherDto: WeatherDtoModel) =
-        WeatherModel(
-            date = weatherDto.date,
-            city = weatherDto.city,
-            avgTemp = weatherDto.avgTemp,
-            maxWind = weatherDto.maxWind,
-            avgHumidity = weatherDto.avgHumidity,
-            text = weatherDto.text,
-            icon = weatherDto.icon
-        )
+class Mapper @Inject constructor() {
+
+     fun weatherDtoToDailyWeatherModel(
+        weatherDto: WeatherDto
+    ): List<DailyWeatherModel> {
+        return weatherDto.forecast.forecastday.map {
+            DailyWeatherModel(
+                date = it.date,
+                city = weatherDto.location.name,
+                avgTemp = it.day.avgTemp,
+                maxWind = it.day.maxWind,
+                avgHumidity = it.day.avgHumidity,
+                text = it.day.condition.text,
+                icon = "https:${it.day.condition.icon}"
+            )
+        }
+    }
 }

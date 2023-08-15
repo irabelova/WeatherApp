@@ -1,5 +1,5 @@
 package com.example.weatherapp.domain
 
 interface DataSource {
-    suspend fun getWeatherForecast(city: String): List<WeatherModel>
+    suspend fun getWeatherForecast(city: String): List<DailyWeatherModel>
 }

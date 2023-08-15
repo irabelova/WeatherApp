@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.DailyWeatherForecastBinding
-import com.example.weatherapp.domain.WeatherModel
+import com.example.weatherapp.domain.DailyWeatherModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class WeatherAdapter(
-    private val weatherForecastsList: List<WeatherModel>
+    private val weatherForecastsList: List<DailyWeatherModel>
 ) :
     RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
@@ -17,14 +20,16 @@ class WeatherAdapter(
     class WeatherViewHolder(
         private val binding: DailyWeatherForecastBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(weather: WeatherModel) {
+        fun bind(weather: DailyWeatherModel) {
+            val date = LocalDate.parse(weather.date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            val formattedDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(date)
+            binding.date.text = formattedDate
             binding.dailyWeatherDescription.text = weather.text
             binding.dailyHumidity.text =
                 binding.root.context.getString(R.string.humidity, weather.avgHumidity)
             binding.dailyTemperature.text =
-                binding.root.context.getString(R.string.temperature, weather.avgTemp)
-            binding.dailyWind.text = binding.root.context.getString(R.string.wind, weather.maxWind)
-            binding.date.text = weather.date
+                binding.root.context.getString(R.string.temperature, String.format("%.1f", weather.avgTemp))
+            binding.dailyWind.text = binding.root.context.getString(R.string.wind, String.format("%.1f", weather.maxWind))
             weather.icon.let {
                 binding.dailyWeatherIcon.load(it) {
                     placeholder(R.drawable.loading_animation)

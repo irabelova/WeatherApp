@@ -1,6 +1,6 @@
 package com.example.weatherapp.domain
 
-data class WeatherModel (
+data class DailyWeatherModel (
     val date: String,
     val city: String,
     val avgTemp: Float,

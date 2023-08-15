@@ -54,21 +54,32 @@ class WeatherFragment: Fragment() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 WeatherUiModel.Loading -> {
-                    binding.statusContainer.visibility = View.VISIBLE
+                    showWeatherLayout(false)
                     binding.statusImage.setImageResource(R.drawable.loading_animation)
                 }
                 is WeatherUiModel.Data -> {
                     val adapter = WeatherAdapter(it.weather)
+                    showWeatherLayout(true)
                     binding.recycleView.adapter = adapter
-                    binding.statusContainer.visibility = View.GONE
+                    binding.weatherCity.text = binding.root.context.getString(R.string.weather_in_the_city, it.weather[0].city)
                 }
                 WeatherUiModel.Error -> {
-                    binding.statusContainer.visibility = View.VISIBLE
+                    showWeatherLayout(false)
                     binding.statusImage.setImageResource(R.drawable.ic_connection_error)
                 }
-
                 else -> {}
             }
+        }
+    }
+
+    private fun showWeatherLayout(isShow: Boolean) {
+        if (isShow){
+            binding.statusContainer.visibility = View.GONE
+            binding.weatherLayout.visibility = View.VISIBLE
+        }
+        else {
+            binding.statusContainer.visibility = View.VISIBLE
+            binding.weatherLayout.visibility = View.GONE
         }
     }
 }
