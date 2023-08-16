@@ -1,7 +1,7 @@
 package com.example.weatherapp.di
 
 import android.content.Context
-import com.example.weatherapp.presentation.WeatherFragment
+import com.example.weatherapp.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -11,9 +11,7 @@ import javax.inject.Singleton
     modules = [DomainModule::class, ViewModelFactoryModule::class, ViewModelModule::class]
 )
 interface AppComponent {
-
-    fun inject(weatherFragment: WeatherFragment)
-
+    fun inject(mainActivity: MainActivity)
     @Component.Factory
     interface AppComponentFactory {
 

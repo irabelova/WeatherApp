@@ -22,7 +22,7 @@ class WeatherViewModel @Inject constructor(
 
     private var searchPerformed = false
 
-    private val searchQuery = MutableStateFlow(DEFAULT_CITY)
+    val searchQuery = MutableStateFlow(DEFAULT_CITY)
     private val isLoading = MutableStateFlow(false)
     private val actualCity = MutableStateFlow<String?>(null)
 
@@ -97,7 +97,7 @@ class WeatherViewModel @Inject constructor(
                 if (it.length > MIN_LETTERS_SEARCH) {
                     updateWeatherForecast(it)
                 } else if (it.isEmpty() && searchPerformed) {
-                    searchQuery.value = DEFAULT_CITY
+                    actualCity.value = DEFAULT_CITY
                 }
             }
 
