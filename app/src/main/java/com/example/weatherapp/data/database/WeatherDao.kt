@@ -1,20 +1,25 @@
 package com.example.weatherapp.data.database
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface WeatherDao {
+abstract class WeatherDao {
 
-   @Transaction
-    @Query("SELECT * FROM Weather WHERE city = :city")
-    suspend fun getWeatherForecast(city: String): List<WeatherDbModel>
+    @Query("SELECT * FROM Weather")
+    abstract fun observeWeatherForecast(): Flow<List<DailyWeatherDbModel>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertWeatherForecast(weatherDb: WeatherDbModel): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertWeatherForecast(dailyWeatherDbList: List<DailyWeatherDbModel>)
 
-    @Update
-    suspend fun updateWeatherForecast(weatherDb: WeatherDbModel)
+    @Query("DELETE  FROM Weather WHERE city LIKE '%' || :city || '%'")
+    abstract suspend fun deleteByCity(city: String)
 
+    @Transaction
+    open suspend fun updateByCity(city: String, weatherList: List<DailyWeatherDbModel>) {
+        deleteByCity(city)
+        insertWeatherForecast(weatherList)
+    }
 }
 
 

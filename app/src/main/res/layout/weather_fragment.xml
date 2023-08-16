@@ -58,10 +58,6 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/daily_weather_icon"
-        app:layout_constraintTop_toBottomOf="@id/daily_temperature"
         tools:text="Weather in Moscow" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -88,6 +84,16 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:contentDescription="@string/status_image" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            android:visibility="gone"
+            android:text="@string/city_was_not_found"/>
+
     </FrameLayout>
 
 </LinearLayout>

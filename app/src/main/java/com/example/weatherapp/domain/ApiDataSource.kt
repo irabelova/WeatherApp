@@ -5,11 +5,11 @@ import javax.inject.Inject
 
 class ApiDataSource  @Inject constructor(
     private val service: WeatherApiService,
-    private val mapper: Mapper
+    private val mapper: NetworkMapper
 ) : DataSource {
 
     override suspend fun getWeatherForecast(city: String): List<DailyWeatherModel> {
         val weatherDto = service.getWeatherForecastByCity(city = city)
-            return mapper.weatherDtoToDailyWeatherModel(weatherDto)
+        return mapper.weatherDtoToDailyWeatherModel(weatherDto)
     }
 }

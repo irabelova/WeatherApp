@@ -9,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.WeatherFragmentBinding
 import com.example.weatherapp.domain.Repository
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class WeatherFragment: Fragment() {
@@ -50,24 +53,37 @@ class WeatherFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.weatherForecast.collectLatest {
+                when (it) {
+                    WeatherUiModel.Loading -> {
+                        showWeatherLayout(false)
+                        binding.statusImage.setImageResource(R.drawable.loading_animation)
+                        binding.errorMessage.visibility = View.GONE
+                        binding.statusImage.visibility = View.VISIBLE
+                    }
+                    is WeatherUiModel.Data -> {
+                        val adapter = WeatherAdapter(it.weather)
+                        showWeatherLayout(true)
+                        binding.recycleView.adapter = adapter
 
-        viewModel.state.observe(viewLifecycleOwner) {
-            when (it) {
-                WeatherUiModel.Loading -> {
-                    showWeatherLayout(false)
-                    binding.statusImage.setImageResource(R.drawable.loading_animation)
+                            binding.weatherCity.text = binding.root.context.getString(
+                                R.string.weather_in_the_city,
+                                it.weather[0].city
+                            )
+
+                    }
+                    WeatherUiModel.Error -> {
+                        showWeatherLayout(false)
+                        binding.statusImage.setImageResource(R.drawable.ic_connection_error)
+                    }
+
+                    WeatherUiModel.Empty -> {
+                        showWeatherLayout(false)
+                        binding.statusImage.visibility = View.GONE
+                        binding.errorMessage.visibility = View.VISIBLE
+                    }
                 }
-                is WeatherUiModel.Data -> {
-                    val adapter = WeatherAdapter(it.weather)
-                    showWeatherLayout(true)
-                    binding.recycleView.adapter = adapter
-                    binding.weatherCity.text = binding.root.context.getString(R.string.weather_in_the_city, it.weather[0].city)
-                }
-                WeatherUiModel.Error -> {
-                    showWeatherLayout(false)
-                    binding.statusImage.setImageResource(R.drawable.ic_connection_error)
-                }
-                else -> {}
             }
         }
     }

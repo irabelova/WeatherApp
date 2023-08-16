@@ -6,12 +6,14 @@ import com.example.weatherapp.data.database.WeatherDao
 import com.example.weatherapp.data.database.WeatherDatabase
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class DataBaseModule {
 
+    @Singleton
     @Provides
-    fun getDataSource(context: Context): WeatherDatabase{
+    fun getDataSource(context: Context): WeatherDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
             WeatherDatabase::class.java,

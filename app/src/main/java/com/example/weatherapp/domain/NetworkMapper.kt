@@ -3,7 +3,7 @@ package com.example.weatherapp.domain
 import com.example.weatherapp.data.network.models.WeatherDto
 import javax.inject.Inject
 
-class Mapper @Inject constructor() {
+class NetworkMapper @Inject constructor() {
 
      fun weatherDtoToDailyWeatherModel(
         weatherDto: WeatherDto

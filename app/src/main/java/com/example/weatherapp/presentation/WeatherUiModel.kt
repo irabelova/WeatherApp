@@ -6,4 +6,6 @@ sealed interface WeatherUiModel {
     object Loading: WeatherUiModel
     data class Data(val weather: List<DailyWeatherModel>): WeatherUiModel
     object Error: WeatherUiModel
+
+    object Empty: WeatherUiModel
 }

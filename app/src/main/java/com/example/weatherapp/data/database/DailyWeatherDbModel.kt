@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Weather")
-data class WeatherDbModel (
+data class DailyWeatherDbModel (
     @PrimaryKey(autoGenerate = true)
     val id: Long,
     val date: String,
@@ -13,5 +13,5 @@ data class WeatherDbModel (
     val maxWind: Float,
     val avgHumidity: Int,
     val text: String,
-    val icon: String
+    val icon: String,
 )
