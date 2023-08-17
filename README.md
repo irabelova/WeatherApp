@@ -21,12 +21,16 @@ WeatherApp - приложение, позволяющее узнать прог�
 
 ## Скриншоты:
 
-![WeatherAppScreen](https://github.com/irabelova/WeatherApp/assets/135704903/635d5230-c251-4659-98b5-d310ccb3f6d7)
-![WeatherAppScreenWithQuery](https://github.com/irabelova/WeatherApp/assets/135704903/a0587332-725a-404f-8865-4460de2b5b6b)
+
+![WeatherAppScreen](https://github.com/irabelova/WeatherApp/assets/135704903/8be02692-7bb0-43fc-b597-ba2b545687fa)
+![WeatherAppScreenWithQuery](https://github.com/irabelova/WeatherApp/assets/135704903/9300ea83-419d-40f4-8fef-ae3bf54bbbd3)
+
 
 ## Видео:
 
-https://github.com/irabelova/WeatherApp/assets/135704903/26b88d19-e91d-4bb9-84ef-636519ac8fdc
+
+https://github.com/irabelova/WeatherApp/assets/135704903/9b7a6f6f-9267-401e-b627-33dd6ceacd5b
+
 
 
 
