@@ -10,6 +10,7 @@ import com.example.weatherapp.domain.DailyWeatherModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.Locale
 
 class WeatherAdapter(
     private val weatherForecastsList: List<DailyWeatherModel>
@@ -22,7 +23,8 @@ class WeatherAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(weather: DailyWeatherModel) {
             val date = LocalDate.parse(weather.date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            val formattedDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(date)
+            val formattedDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(
+                Locale.ENGLISH).format(date)
             binding.date.text = formattedDate
             binding.dailyWeatherDescription.text = weather.text
             binding.dailyHumidity.text =
